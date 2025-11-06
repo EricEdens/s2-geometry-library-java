@@ -13,16 +13,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth:         0  # Required for rebase to work properly
 
       - name: Set up Git
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
+        run:  |
+              git config --global user.name 'github-actions'
+              git config --global user.email 'github-actions@github.com'
 
-      - name: Add upstream
-        run: |
-          git remote add upstream https://github.com/google/s2-geometry-library-java.git
-          git fetch upstream
-          git merge upstream/master --allow-unrelated-histories -m "Sync from upstream"
-          git push origin master
-
+      - name: Add upstream and rebase
+        run:  |
+              git remote add upstream https://github.com/google/s2-geometry-library-java.git
+              git fetch upstream
+              git rebase upstream/master
+              git push origin HEAD:master --force-with-lease
