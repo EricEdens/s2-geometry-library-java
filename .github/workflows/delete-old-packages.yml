@@ -1,0 +1,21 @@
+name: Delete Old Maven Packages
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 0'  # Every Sunday at 3 AM UTC
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+
+    steps:
+      - name: Delete all but latest 5 Maven versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name:         hpe.s2
+          package-type:         maven
+          min-versions-to-keep: 2

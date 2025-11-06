@@ -1,5 +1,3 @@
-import java.io.ByteArrayOutputStream
-
 plugins {
   java
   `maven-publish`
@@ -34,6 +32,18 @@ dependencies {
 }
 
 version = findProperty("gitVersion") ?: "0.0.0-SNAPSHOT"
+
+java {
+  withSourcesJar()
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+tasks.withType<Test> {
+  useJUnit()
+  maxParallelForks = Runtime.getRuntime().availableProcessors()
+}
 
 publishing {
   publications {
