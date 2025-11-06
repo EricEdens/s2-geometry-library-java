@@ -1,0 +1,6 @@
+[libraries]
+fastutil = "it.unimi.dsi:fastutil:8.5.18"
+guava = "com.google.guava:guava:33.5.0-jre"
+jsinterop = "com.google.jsinterop:jsinterop-annotations:2.1.0"
+junit = "junit:junit:4.13.2"
+truth = "com.google.truth:truth:1.4.5"
